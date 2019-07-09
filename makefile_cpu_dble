@@ -1,0 +1,55 @@
+CUDA_HOME=/usr/local/cudal10.1
+MKL_FFLAGS= -pgf90libs 
+#sngl and dble libs:
+FFTW3_FFLAGS= -L/opt/fftw3.3.8_pgi/lib -I/opt/fftw3.3.8_pgi/include -lfftw3 -lfftw3f -lfftw3_threads -lfftw3f_threads -Wl,-rpath=/opt/fftw3.3.8_pgi/lib
+
+#-c:	Halts the compilation process after the assembling phase and writes the object code to a file
+#-g:	Instructs the compiler to include symbolic debugging information in the object module; sets the optimization level to zero unless a -⁠O option is present on the command lin
+#-Mpreprocess:	Perform cpp-like preprocessing on assembly language and Fortran input source files
+#-Mbackslash:	Determines how the backslash character is treated in quoted strings (Fortran only)
+#-Mconcur:	Enable auto-concurrentization of loops. Multiple processors or cores will be used to execute parallelizable loops
+#-Mextend:	Instructs the compiler to accept 132-column source code; otherwise it accepts 72-column code (Fortran only)
+#-Mcuda:	Enables CUDA Fortran
+#-ta:		Enable OpenACC and specify the type of accelerator to which to target accelerator regions (tesla,host,multicore) NO turing support!
+#-O3:		Level three specifies aggressive global optimization. This level performs all level-one and level-two optimizations and enables more aggressive hoisting and scalar replacement optimizations that may or may not be profitable
+#-Wl,rpath=	Stores the path of the libraries in the executable.
+#-#:		show invocations of compiler, assembler and linker
+
+PGF_FLAGS= -c -g -O3 -Mpreprocess -Mbackslash -Mconcur -Mextend ${MKL_FFLAGS} $(FFTW3_FFLAGS) -Mcuda=cuda10.1 -Ddouble_precision -ta=tesla -Mfree -Mrecursive
+
+THREAD_LINK=${MKL_LIBS}
+
+Hn0_tcmp: intermediate 
+	pgf90 -# -Mcuda=cuda10.1 -o mustem_cpu_dble *.o -L${CUDA_HOME}/lib $(FFTW3_FFLAGS) -lcufft $(THREAD_LINK)
+
+modules:
+	pgf90 $(PGF_FLAGS) quadpack.f90
+	pgf90 $(PGF_FLAGS) mod_CUFFT_wrapper.f90
+	pgf90 $(PGF_FLAGS) m_precision.f90
+	pgf90 $(PGF_FLAGS) m_string.f90
+	pgf90 $(PGF_FLAGS) m_numerical_tools.f90
+	pgf90 $(PGF_FLAGS) mod_global_variables.f90
+	pgf90 $(PGF_FLAGS) m_crystallography.f90
+	pgf90 $(PGF_FLAGS) m_electron.f90
+	pgf90 $(PGF_FLAGS) m_user_input.f90
+	pgf90 $(PGF_FLAGS) mod_output.f90
+	pgf90 $(PGF_FLAGS) m_multislice.f90
+	pgf90 $(PGF_FLAGS) m_lens.f90
+	pgf90 $(PGF_FLAGS) m_tilt.f90
+	pgf90 $(PGF_FLAGS) m_absorption.f90
+	pgf90 $(PGF_FLAGS) m_potential.f90
+	pgf90 $(PGF_FLAGS) MS_utilities.f90
+	pgf90 $(PGF_FLAGS) s_absorptive_stem.f90
+	pgf90 $(PGF_FLAGS) s_qep_tem.f90
+	pgf90 $(PGF_FLAGS) s_qep_stem.f90
+	pgf90 $(PGF_FLAGS) s_absorptive_tem.f90
+	pgf90 $(PGF_FLAGS) muSTEM.f90
+
+intermediate: *.f90 modules
+	pgf90 $(PGF_FLAGS) *.f90
+
+clean:
+	rm -f *.o *.mod *.tmp *.TMP *.out
+
+
+
