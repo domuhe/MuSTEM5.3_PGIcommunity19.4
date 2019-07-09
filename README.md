@@ -54,7 +54,7 @@ Note: Don't forget to run "make clean" between builds
 
 ## Build
 
-###Windows
+### Windows
 <ul>
 <li> open PGI cygwin terminal (this has all necessary environment variables set)</li>
 <li>edit top of Makefile to configure type of build (GPU/CPU,single,dble,Win/Lin,paths)</li>
@@ -63,7 +63,7 @@ Note: Don't forget to run "make clean" between builds
 <li>add the fftw3 DLLs to your library search path!
 </ul>
 
-###Linux
+### Linux
 
 <ul>
 <li> open bash terminal </li>
