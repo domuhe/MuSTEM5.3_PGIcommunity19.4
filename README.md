@@ -48,7 +48,9 @@ Install
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.1/lib64
 
 
-**Note: Quick hack in line 145 in mustem.f90: change "OPEN (6, CARRIAGECONTROL = "FORTRAN")" to "Open(6)" was necessary to get it to compile**
+**Note: Quick hack in line 145 in mustem.f90: change "OPEN (6, CARRIAGECONTROL = "FORTRAN")" to "Open(6)" was necessary to get it to compile. Then added "call flush" to re-enable overwriting on command line**
+
+**Note: Added path_sep variable to pick forward or backward slash for path separator depending os OS**
 
 Note: Don't forget to run "make clean" between builds
 
