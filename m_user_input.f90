@@ -277,6 +277,8 @@ module m_user_input
         call test_prompt(prompt)
                
 5       write(*,'(1x, a)', advance='no') '> '
+        !DMH
+        call flush(6)
         s = get_string_from_file(input_file_number,line_no)
         
         if (input_file_number.eq.in_file_number) write(*,*) trim(adjustl(s))
@@ -312,6 +314,8 @@ module m_user_input
         call test_prompt(prompt)
           
 5       write(*,'(1x, a)', advance='no') '> '
+        !DMH
+        call flush(6)
         s = get_string_from_file(input_file_number,line_no)
         
         if (input_file_number.eq.in_file_number) write(*,*) trim(adjustl(s))
@@ -336,6 +340,8 @@ module m_user_input
         call test_prompt(prompt)
         
 5       write(*,'(1x, a)', advance='no') '> '
+        !DMH
+        call flush(6)
         s = get_string_from_file(input_file_number,line_no)
         
         if (input_file_number.eq.in_file_number) write(*,*) trim(adjustl(s))
@@ -379,6 +385,8 @@ module m_user_input
         call test_prompt(prompt)
         
 5       write(*,'(1x, a)', advance='no') '> '
+        !DMH
+        call flush(6)
         s = get_string_from_file(input_file_number,line_no)
         
         if (input_file_number.eq.in_file_number) write(*,*) trim(adjustl(s))
@@ -424,7 +432,9 @@ module m_user_input
         call test_prompt(prompt)
         
 5       write(*,'(1x, a)', advance='no') '> '
-		s = get_string_from_file(input_file_number,line_no,formatter = '(a128)')
+        !DMH
+        call flush(6)
+        s = get_string_from_file(input_file_number,line_no,formatter = '(a128)')
         
         if (input_file_number.eq.in_file_number) write(*,*) trim(adjustl(s))
 
@@ -474,6 +484,8 @@ module m_user_input
         call test_prompt(prompt)
         
 5       write(*,'(1x, a)', advance='no') '> '
+        !DMH
+        call flush(6)
         s = get_string_from_file(input_file_number,line_no)
         
         if (input_file_number.eq.in_file_number) write(*,*) trim(adjustl(s))
@@ -519,6 +531,8 @@ module m_user_input
         call test_prompt(prompt)
         
 5       write(*,'(1x, a)', advance='no') '> '
+        !DMH
+        call flush(6)
         s = get_string_from_file(input_file_number,line_no)
         
         if (input_file_number.eq.in_file_number) write(*,*) trim(adjustl(s))

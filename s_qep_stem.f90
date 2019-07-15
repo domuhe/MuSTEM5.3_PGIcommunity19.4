@@ -278,7 +278,9 @@ subroutine qep_stem(STEM,ionization,PACBED)
     do nx = 1, nxsample
 #ifdef GPU
     write(6,903,ADVANCE='NO') achar(13), i_df, probe_ndf, ny, nysample, nx, nxsample, intensity
-903     format(a1,' df:',i3,'/',i3,' y:',i3,'/',i3,' x:',i3,'/',i3,'  Intensity:', f6.3, ' (to monitor BWL)')	
+903 format(a1,' df:',i3,'/',i3,' y:',i3,'/',i3,' x:',i3,'/',i3,'  Intensity:', f6.3, ' (to monitor BWL)')
+    !DMH
+    call flush(6)
 #else
         write(6,900) i_df, probe_ndf, ny, nysample, nx, nxsample, intensity
 900     format(1h+,1x,' df:',i3,'/',i3,' y:',i3,'/',i3,' x:',i3,'/',i3,'  Intensity:', f6.3, ' (to monitor BWL)')	

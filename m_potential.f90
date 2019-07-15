@@ -39,6 +39,15 @@ module m_potential
     logical :: phase_ramp_shift
     logical(4) :: quick_shift
 
+    !DMH
+#ifdef LIN
+    character(len=1), parameter :: path_sep='/'
+#elif WIN
+    character(len=1), parameter :: path_sep='\'
+#else
+#error "path_sep not defined, Set this constant for your system"
+#endif
+
     interface
         subroutine make_site_factor_generic(site_factor, tau)
             use m_precision, only: fp_kind
@@ -356,7 +365,9 @@ module m_potential
     
         !open the pertinent data files
         
-        filename = 'ionization_data\EELS_EDX_'//shell//'.dat'
+        !DMH        filename = 'ionization_data\EELS_EDX_'//shell//'.dat'
+        character*1::path_sep='/'
+        filename = 'ionization_data'//path_sep//'EELS_EDX_'//shell//'.dat'
 		open(unit=35,file=filename,status='old',err=970)
         
         l = len('Z = '//to_string(int(atno))//' ')
@@ -416,7 +427,8 @@ module m_potential
         lineno = get_ionization_shell_line(shell,atno)
 		
 		!open the pertinent data files and read to relevant line        
-		open(unit=16,file='ionization_data\EELS_EDX_'//shell//'.dat',status='old',err=970)
+!DMH		open(unit=16,file='ionization_data\EELS_EDX_'//shell//'.dat',status='old',err=970)
+		open(unit=16,file='ionization_data'//path_sep//'EELS_EDX_'//shell//'.dat',status='old',err=970)
 		do iz = 1,lineno
 		   read(16,*) junk
         enddo
@@ -899,7 +911,9 @@ module m_potential
 
 	        do i = 1, n_qep_grates
     200	        format(a1, 1x, i3, '/', i3)
-	            write(6,200, advance='no') achar(13), i, n_qep_grates
+                   write(6,200, advance='no') achar(13), i, n_qep_grates
+                   !DMH
+                   call flush(6)
           
                 ! Randomly displace the atoms
 				if (.not.fracocc) then

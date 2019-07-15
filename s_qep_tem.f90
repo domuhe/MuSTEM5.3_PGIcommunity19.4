@@ -295,7 +295,9 @@ psi_initial_d = psi_initial
         
         intensity = get_sum(psi_d)
 		write(6,900,advance='no') achar(13), i_qep_pass, n_qep_passes, intensity
-    900 format(a1, 1x, 'QEP pass:', i4, '/', i4, ' Intensity: ', f8.3)	
+900 format(a1, 1x, 'QEP pass:', i4, '/', i4, ' Intensity: ', f8.3)
+                !DMH
+                call flush(6)
 #else
     cbed = 0.0_fp_kind
     psi_elastic = 0.0_fp_kind

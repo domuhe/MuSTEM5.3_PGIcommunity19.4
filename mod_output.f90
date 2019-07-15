@@ -111,7 +111,6 @@ module output
 
 			  integer*4::j
 
-	
                 j = index(filepath,'/',back=.true.)
                 j = max(j,index(filepath,'\',back=.true.))
         

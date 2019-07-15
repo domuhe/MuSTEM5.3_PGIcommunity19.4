@@ -21,7 +21,7 @@
 ###############################################################################################
 #CHANGE HERE AS NECESARY:
 #(gpu/cpu)
-PROC=cpu
+PROC=gpu
 #(double/single)
 PREC=single
 #(lin/win)
@@ -81,8 +81,10 @@ endif
 
 OBJ=o
 EXE3=out
+OS_FLAG=-DLIN
 ifeq ($(OS),win)
-    STATIC=-Bstatic
+	OS_FLAG=-DWIN
+	STATIC=-Bstatic
 	OBJ=obj
 	EXE3=exe
 endif
@@ -108,10 +110,10 @@ BINARY=mustem_$(EXE1)_$(EXE2).$(EXE3)
 #-#:		show invocations of compiler, assembler and linker during Makefile run
 ###########################################################
 
-PGF_FLAGS=$(STATIC) -c -g -O3 -Mpreprocess -Mbackslash -Mconcur -Mextend -Mfree -Mrecursive -mp  $(FFTW3_FLAGS) -D$(PRECISION) $(GPU_FLAGS) $(DBG)
+PGF_FLAGS=$(STATIC) -c -g -O3 -Mpreprocess -Mbackslash -Mconcur -Mextend -Mfree -Mrecursive -mp  $(FFTW3_FLAGS) -D$(PRECISION) $(GPU_FLAGS) $(OS_FLAG) $(DBG)
 
 executable: intermediate
-	pgf90 -o $(BINARY) *.$(OBJ) $(STATIC) -mp $(FFTW3_FLAGS) $(GPU_FLAGS)  $(DBG) 
+	pgf90 -o $(BINARY) *.$(OBJ) $(STATIC) -mp $(FFTW3_FLAGS) $(GPU_FLAGS) $(OS_FLAG)  $(DBG) 
 
 modules:
 ifeq ($(PROC),gpu)

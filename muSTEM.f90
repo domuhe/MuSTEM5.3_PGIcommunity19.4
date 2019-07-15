@@ -55,6 +55,7 @@
         
         implicit none
         
+        
         integer :: i_illum, i_tds_model, i_cb_menu, i_cb_calc_type,ifile,nfiles,i_arg,idum,i
         
         logical :: nopause = .false.,there,ionization,stem,pacbed
@@ -142,7 +143,7 @@
         ! Set up GPU
         call setup_GPU
 #else
-        !open(6,carriagecontrol='fortran')
+        !DMH open(6,carriagecontrol='fortran')
         open(6)
 #endif
         

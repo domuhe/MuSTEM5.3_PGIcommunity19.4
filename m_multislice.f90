@@ -49,6 +49,16 @@ module m_multislice
     real(fp_kind), allocatable :: depths(:)               !Unit cell subslice depths (i.e. same as above)
     real(fp_kind), allocatable :: ss_slice(:,:)
 
+    !DMH
+#ifdef LIN
+    character(len=1), parameter :: path_sep='/'
+#elif WIN
+    character(len=1), parameter :: path_sep='\'
+#else
+#error "path_sep not defined, Set this constant for your system"
+#endif
+
+
     interface load_save_add_grates
         module procedure load_save_add_grates_qep,load_save_add_grates_abs
     end interface
@@ -145,13 +155,15 @@ module m_multislice
             enddo    
 
                 call split_filepath(output_prefix,dir,fnam)
-                call system('mkdir '//trim(adjustl(dir))//'\Probe_intensity')
+!DMH                call system('mkdir '//trim(adjustl(dir))//'\Probe_intensity')
+                call system('mkdir '//trim(adjustl(dir))//path_sep//'Probe_intensity')
                 call generate_cell_list(thickness_interval)
                 call write_thicknesss_to_file
                 
                 write(*,*) 'The probe intensities will be written to the files'
                 write(*,*)
-                write(*,*) '  '//trim(adjustl(dir))//'\Probe_intensity' // trim(adjustl(fnam)) // '_ProbeIntensity*.bin'
+!DMH                write(*,*) '  '//trim(adjustl(dir))//'\Probe_intensity' // trim(adjustl(fnam)) // '_ProbeIntensity*.bin'
+                write(*,*) '  '//trim(adjustl(dir))//path_sep//'Probe_intensity' // trim(adjustl(fnam)) // '_ProbeIntensity*.bin'
                 write(*,*)
                 if (fp_kind.eq.4) write(*,*) 'as 32-bit big-endian floats.'
                 if (fp_kind.eq.8) write(*,*) 'as 64-bit big-endian floats.'
@@ -237,9 +249,11 @@ module m_multislice
         if(j>0) then
             dir = trim(adjustl(output_prefix(:j)))
             fnam = trim(adjustl(output_prefix(j:)))
-            filename = trim(adjustl(dir))//'\Probe_intensity'//trim(adjustl(fnam))//'_probe_intensity_thicknesss.txt'
+!DMH            filename = trim(adjustl(dir))//'\Probe_intensity'//trim(adjustl(fnam))//'_probe_intensity_thicknesss.txt'
+            filename = trim(adjustl(dir))//path_sep//'Probe_intensity'//trim(adjustl(fnam))//'_probe_intensity_thicknesss.txt'
         else
-            filename = 'Probe_intensity\'//trim(adjustl(output_prefix))//'_probe_intensity_thicknesss.txt'
+!DMH            filename = 'Probe_intensity\'//trim(adjustl(output_prefix))//'_probe_intensity_thicknesss.txt'
+            filename = 'Probe_intensity'//path_sep//trim(adjustl(output_prefix))//'_probe_intensity_thicknesss.txt'
         endif
         
         write(*,*) 'The thicknesses at which the probe intensity'
@@ -279,9 +293,11 @@ module m_multislice
         if(j>0) then
             dir = trim(adjustl(output_prefix(:j)))
             fnam = trim(adjustl(output_prefix(j:)))
-            filename = trim(adjustl(dir))//'\Probe_intensity\'//trim(adjustl(fnam))//'_ProbeIntensity'
+!DMH            filename = trim(adjustl(dir))//'\Probe_intensity\'//trim(adjustl(fnam))//'_ProbeIntensity'
+            filename = trim(adjustl(dir))//path_sep//'Probe_intensity\'//trim(adjustl(fnam))//'_ProbeIntensity'
         else
-            filename = 'Probe_intensity\'//trim(adjustl(output_prefix))//'_ProbeIntensity'
+!DMH            filename = 'Probe_intensity\'//trim(adjustl(output_prefix))//'_ProbeIntensity'
+            filename = 'Probe_intensity'//path_sep//trim(adjustl(output_prefix))//'_ProbeIntensity'
         endif
             
         if (probe_ndf.gt.1) filename = trim(filename) // '_df' // to_string(i_df)
@@ -726,6 +742,8 @@ subroutine load_save_add_grates_abs(abs_grates,nopiy,nopix,n_slices)
             
 	            do i = 1, n_slices
 	                write(6,20,ADVANCE='NO') achar(13), i
+                        !DMH
+                        call flush(6)
         20          format( a1,' Enter the fractional depth of slice number ', i4, ':  ')
 	                call get_input("depths", depths(i))
 	            enddo

@@ -202,11 +202,12 @@ module m_absorption
 #ifdef GPU            
         131 format(a1,' Calculating absorptive scattering factor ', i4, ' of ', i4, '...' )
             write(6,131, advance='no') achar(13),ipa, max_int
+            !DMH
+            call flush(6)
 #else
         131 format(1h+,' Calculating absorptive scattering factor ', i4, ' of ', i4, '...' )
             write(6,131) ipa, max_int
 #endif
-            !flush(unit=6)
 
             g = (ipa-1) * kstep
 

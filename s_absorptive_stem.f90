@@ -280,6 +280,8 @@ subroutine absorptive_stem(STEM,ionization,PACBED)
     else
     write(6, 901, advance='no') achar(13), i_df,probe_ndf,ny, nysample, nx, nxsample, intens
     endif
+    !DMH
+    call flush(6)
 901     format(a1,' df:',i3,'/',i3,' y:',i3,'/',i3,' x:',i3,'/',i3,'  Intensity:', f6.3)	
 902     format(a1,' df:',i3,'/',i3,' y:',i3,'/',i3,' x:',i3,'/',i3,' tilt:',i3,'/',i3'  Intensity:', f6.3)	
 #else
