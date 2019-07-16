@@ -115,7 +115,7 @@ subroutine absorptive_tem
         psi_initial = psi_initial/sqrt(sum(abs(psi_initial)**2))
     endif
     call tilt_wave_function(psi_initial)
-    if(.not.load_grates) projected_potential = make_absorptive_grates(nopiy,nopix,n_slices)
+    if(.not.load_grates) call make_absorptive_grates(nopiy,nopix,n_slices, projected_potential)
     call load_save_add_grates(projected_potential,nopiy,nopix,n_slices)
     
 

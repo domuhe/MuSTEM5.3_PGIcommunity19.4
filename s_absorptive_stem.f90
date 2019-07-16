@@ -134,7 +134,7 @@ subroutine absorptive_stem(STEM,ionization,PACBED)
         call cuda_setup_many_phasegrate()                   
 #endif        
     else
-        if(.not.load_grates) projected_potential = make_absorptive_grates(nopiy,nopix,n_slices)
+        if(.not.load_grates) call make_absorptive_grates(nopiy,nopix,n_slices,projected_potential)
         call load_save_add_grates(projected_potential,nopiy,nopix,n_slices)
         if(ionization.or.stem) call make_local_inelastic_potentials(ionization)
     endif

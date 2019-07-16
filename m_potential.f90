@@ -772,7 +772,7 @@ module m_potential
     endif
     
     end function
-    function make_absorptive_grates(nopiy,nopix,n_slices) result(projected_potential)
+    subroutine make_absorptive_grates(nopiy,nopix,n_slices,projected_potential)
     
         use m_precision, only: fp_kind
 	    use cufft_wrapper, only: fft2, ifft2
@@ -826,7 +826,7 @@ module m_potential
 			close(9834)
         endif    
         
-    end function make_absorptive_grates
+    end subroutine make_absorptive_grates
     
            
         integer function seed_rng() result(idum)
