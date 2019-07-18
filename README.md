@@ -4,11 +4,14 @@ Source folder of MuSTEMv5.3 with working Makefile for build with PGI Community 1
 This folder consists of the MuSTEMv5.3 "Source" folder plus my own Makefile and pgi.env to build MuSTEM v5.3
 on Windows10 and Ubuntu18.04 with PGI Community 19.4 for an RTX 2080Ti graphics card that requires Cuda 10.0 as a minimum.
 
-TOK with
+Build TOK with
 <ul>
 <li>Windows10 with Turing architecture NVidia GPU (RTX 2080Ti) with PGI Community compiler v19.4 and version 5.3 Source folder of MuSTEM from github</li>
 <li>    and Ubuntu 18.04 with Turing architecture NVidia GPU (RTX 2080Ti) with PGI Community compiler v19.4 and version 5.3 Source folder of MuSTEM from github</li>
 </ul>
+
+**But, Linux build has problem with STEM examples in Tutorial "0: ALLOCATE: 1683627180072 bytes requested; not enough memory"**
+Windows build runs through the Tutorial examples without problems.
 
 ## Prerequisites
 
@@ -47,14 +50,22 @@ Install
     export CUDADIR=/usr/local/cuda-10.1
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.1/lib64
 
+## Changes to original version 5.3 source code:
 
-**Note: Quick hack in line 145 in mustem.f90: change "OPEN (6, CARRIAGECONTROL = "FORTRAN")" to "Open(6)" was necessary to get it to compile. Then added "call flush" to re-enable overwriting on command line**
+<ul>
+<li> **"OPEN (6, CARRIAGECONTROL = "FORTRAN")" not supported by PGI 19.4**
+=>line 145 in mustem.f90: change "OPEN (6, CARRIAGECONTROL = "FORTRAN")" to "Open(6)" was necessary to get it to compile. Then added "call flush" to enable overwriting on command line after an open (6,1,advance=no)
+=>added "call flush" to m_absorption.f90, m_multislice.f90, m_potential.f90, m_user_input.f90, s_absorptive_stem.f90, s_qep_stem.f90 and s_qep_tem.f90
+</li>
+<li> **backward slash hard-coded as path separator**
+Added -DLIN preprocessor directive to Makefile and set path_sep variable to pick forward or backward slash for path separator depending on OS in m_multislice.f90 and m_potential.f90
+</li>
+</ul>
 
-**Note: Added path_sep variable to pick forward or backward slash for path separator depending os OS**
-
-Note: Don't forget to run "make clean" between builds
 
 ## Build
+
+Note to self: Don't forget to run "make clean" between builds
 
 ### Windows
 <ul>

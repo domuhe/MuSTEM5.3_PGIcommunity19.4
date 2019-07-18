@@ -366,7 +366,6 @@ module m_potential
         !open the pertinent data files
         
         !DMH        filename = 'ionization_data\EELS_EDX_'//shell//'.dat'
-        character*1::path_sep='/'
         filename = 'ionization_data'//path_sep//'EELS_EDX_'//shell//'.dat'
 		open(unit=35,file=filename,status='old',err=970)
         

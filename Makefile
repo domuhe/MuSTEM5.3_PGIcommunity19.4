@@ -21,9 +21,9 @@
 ###############################################################################################
 #CHANGE HERE AS NECESARY:
 #(gpu/cpu)
-PROC=gpu
+PROC=cpu
 #(double/single)
-PREC=single
+PREC=double
 #(lin/win)
 OS=lin
 #FFTW3 location 
