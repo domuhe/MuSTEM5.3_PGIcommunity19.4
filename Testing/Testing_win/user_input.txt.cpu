@@ -1,0 +1,7 @@
+play all
+txt_files/STEM_Si110_PACBED_driver.txt
+txt_files/STEM_SrTiO3_STEM_driver.txt
+txt_files/STEM_Al110_CBED_driver.txt
+txt_files/TEM_Si3N4_HRTEM_driver.txt
+txt_files/HRTEM_example.txt
+txt_files/STEM_Al3Li_ABF_driver.txt

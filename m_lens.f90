@@ -422,11 +422,20 @@ module m_lens
         endif
      do while(ich.ne.1)
          if(interpolation) able_string = 'enabled'
-         if(.not.interpolation) able_string = 'disabled'
+         !DMH if(.not.interpolation) able_string = 'disabled'
+         if(.not.interpolation) then
+            able_string = 'disabled'
+         endif
           write(6,103) r1, a1, char(143), r2, a2, char(143), thetad2, origin(1), origin(2), probe_cutoff
-          if(.not.PACBED_only) write(6,104)
+          !DMH if(.not.PACBED_only) write(6,104)
+          if(.not.PACBED_only) then
+             write(6,104)
+          endif
           write(6,105) PACBED_or_STEM,min_step,nxsample_, nysample_, ceiling(nxsample/fract(1)),ceiling(nysample/fract(2)),nxsample, nysample
-          if(.not.PACBED_only) write(6,106) able_string
+          !DMH if(.not.PACBED_only) write(6,106) able_string
+          if(.not.PACBED_only) then
+             write(6,106) able_string
+          endif
           write(6,107)
 103         format(/,' The probe scan vectors are: ', /,                  & 
             &       ' x = ', 3g12.5, ' mag = ', g12.5, 1x, a1, /,         &
@@ -540,7 +549,10 @@ module m_lens
         if(present(PACBED)) PACBED_=PACBED
         
         if(PACBED_) n = ceiling(2 * qmax * L)
-        if(.not.PACBED_) n = ceiling(4 * qmax * L)
+        !DMH if(.not.PACBED_) n = ceiling(4 * qmax * L)
+        if(.not.PACBED_) then
+           n = ceiling(4 * qmax * L)
+        endif
         
     end function
     
@@ -556,7 +568,10 @@ module m_lens
         if(present(PACBED)) PACBED_=PACBED
         
         if(PACBED_) step = 2 * qmax
-        if(.not.PACBED_) step = 4 * qmax
+        !DMH if(.not.PACBED_) step = 4 * qmax
+        if(.not.PACBED_) then
+           step = 4 * qmax
+        endif
 
     end function
     

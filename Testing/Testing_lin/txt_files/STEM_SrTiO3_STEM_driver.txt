@@ -1,0 +1,174 @@
+Output filename
+    STEM_SrTiO3/STEM_SrTiO3
+Input crystal file name
+    xtl_files/SrTiO3.xtl
+Probe accelerating voltage (kV)
+    200.0000
+Slice unit cell <1> yes <2> no
+    1
+Number of distinct potentials
+    2
+<1> manual or <2> auto slicing
+    2
+Thickness
+    39.050000
+Scattering factor accuracy
+    2
+Tile supercell x
+    5
+Tile supercell y
+    5
+Number of pixels in x
+    512
+Number of pixels in y
+    512
+<1> Continue <2> Change
+    1
+Calculation type
+    2
+aperture cutoff
+    20.00000
+Defocus
+    0.0000
+Change probe forming lens parameters
+    3
+2-Fold astig. coefficient
+    0.000000
+2-Fold astig. azimuth
+    0.000000
+Change probe forming lens parameters
+    4
+Axial coma coefficient
+    0.000000
+Axial coma azimuth
+    0.000000
+Change probe forming lens parameters
+    5
+3-Fold astig. coefficient
+    0.000000
+3-Fold astig. azimuth
+    0.000000
+Change probe forming lens parameters
+    6
+3rd order spher. coefficient
+    0.000000
+Change probe forming lens parameters
+    7
+Axial star aber. coefficient
+    0.000000
+Axial star aber. azimuth
+    0.000000
+Change probe forming lens parameters
+    8
+4-Fold astig. coefficient
+    0.000000
+4-Fold astig. azimuth
+    0.000000
+Change probe forming lens parameters
+    9
+4th order coma coefficient
+    0.000000
+4th order coma azimuth
+    0.000000
+Change probe forming lens parameters
+    10
+3-Lobe aberr. coefficient
+    0.000000
+3-Lobe aberr. azimuth
+    0.000000
+Change probe forming lens parameters
+    11
+5-Fold astig coefficient
+    0.000000
+5-Fold astig azimuth
+    0.000000
+Change probe forming lens parameters
+    12
+5th order spher. coefficient
+    0.000000
+Change probe forming lens parameters
+    13
+5th order star coefficient
+    0.000000
+5th order star azimuth
+    0.000000
+Change probe forming lens parameters
+    14
+5th order rosette coefficient
+    0.000000
+5th order rosette azimuth
+    0.000000
+Change probe forming lens parameters
+    15
+6-Fold astig. coefficient
+    0.000000
+6-Fold astig. azimuth
+    0.000000
+Change probe forming lens parameters
+    0
+<1> QEP <2> ABS
+    2
+<1> Absorption <2> No absorption
+    1
+Elastic and inelastic scattering output choice
+    1
+<0> Continue <1> Beam tilt <2> Specimen tilt
+    1
+Beam tilt in mrad
+    0.000000
+Beam tilt azimuth in mrad
+    0.000000
+<0> Continue <1> Beam tilt <2> Specimen tilt
+    0
+<0> continue <1> save <2> load
+    0
+<1> CBED <2> STEM/PACBED
+    2
+STEM modes
+    1
+STEM modes
+    2
+STEM modes
+    0
+Probe scan menu choice
+    1
+output interpolation max pixels
+    128
+output interpolation tilex
+    2
+output interpolation tiley
+    2
+<0> Proceed <1> Output probe intensity
+    0
+Number of detectors
+    3
+manual detector <1> auto <2>
+    1
+<1> mrad <2> inv A
+    1
+inner
+    0.000000
+outer
+    2.000000
+inner
+    10.00000
+outer
+    20.00000
+inner
+    70.00000
+outer
+    220.0000
+Ionization choice
+    2
+Shell choice <0> continue
+    2
+Shell choice <0> continue
+    3
+Shell choice <0> continue
+    8
+Shell choice <0> continue
+    10
+Shell choice <0> continue
+    11
+Shell choice <0> continue
+    0

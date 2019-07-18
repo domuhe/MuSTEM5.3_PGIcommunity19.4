@@ -1,0 +1,56 @@
+Device used for calculation
+    0
+Output filename
+    HRTEM/HRTEM_example
+Input crystal file name
+    xtl_files/SrTiO3_001.xtl
+Probe accelerating voltage (kV)
+    300.0000
+Slice unit cell <1> yes <2> no
+    1
+Number of distinct potentials
+    2
+<1> manual or <2> auto slicing
+    1
+depths
+    0.000000
+depths
+    0.5000000
+Thickness
+    50:200:50
+Scattering factor accuracy
+    1
+Tile supercell x
+    1
+Tile supercell y
+    1
+Number of pixels in x
+    128
+Number of pixels in y
+    128
+<1> Continue <2> Change
+    1
+Calculation type
+    1
+<1> QEP <2> ABS
+    2
+<1> Absorption <2> No absorption
+    1
+Elastic and inelastic scattering output choice
+    1
+<0> Continue <1> Beam tilt <2> Specimen tilt
+    0
+<0> continue <1> save <2> load
+    0
+aperture cutoff
+    9.610000
+Defocus
+    -560:0:280
+Change image forming lens parameters
+    6
+3rd order spher. coefficient
+    1.200000
+Change image forming lens parameters
+    0
+<0> Precalculated potentials <1> On-the-fly calculation
+    0

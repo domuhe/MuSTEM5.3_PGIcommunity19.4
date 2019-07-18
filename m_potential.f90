@@ -565,7 +565,10 @@ module m_potential
 	if(EDX) write(*,100) ' Orbital | Shell '
 110 format(1x,'<',i2,'>',2x,a2,2x,'|',1x,i2,1x,'|',2x,a2,5x,'|',1x,a3,3x,'|',1x,a1,6x)
     
-    if(.not.EDX) write(*,100) ' Orbital | Shell | Window (eV)'
+    !DMH changed to newline statement in if:
+    if(.not.EDX) then
+       write(*,100) ' Orbital | Shell | Window (eV)'
+    endif
 111 format(1x,'<',i2,'>',2x,a2,2x,'|',1x,i2,1x,'|',2x,a2,5x,'|',1x,a3,3x,'|',1x,f5.1,6x,'|',1x,a1,6x)
 120 format(' < 0> continue')
     
@@ -575,7 +578,10 @@ module m_potential
         
             if(get_ionization_shell_line(shell_name_EELS(j),ZZ)>-1) then
                 if(EDX) write(*,110) ii,trim(adjustl(substance_atom_types(i))),int(ZZ),shell_name_EELS(j),shells(j),logical_to_yn(choices(ii))
-                if(.not.EDX) write(*,111) ii,trim(adjustl(substance_atom_types(i))),int(ZZ),shell_name_EELS(j),shells(j),DE(ii),logical_to_yn(choices(ii))
+               !DMH changed to newline statement in if:
+                if(.not.EDX) then
+                   write(*,111) ii,trim(adjustl(substance_atom_types(i))),int(ZZ),shell_name_EELS(j),shells(j),DE(ii),logical_to_yn(choices(ii))
+                endif
                 ii=ii+1
             endif
         enddo;enddo

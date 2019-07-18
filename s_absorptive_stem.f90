@@ -134,7 +134,9 @@ subroutine absorptive_stem(STEM,ionization,PACBED)
         call cuda_setup_many_phasegrate()                   
 #endif        
     else
-        if(.not.load_grates) projected_potential = make_absorptive_grates(nopiy,nopix,n_slices)
+       if(.not.load_grates) then
+          projected_potential = make_absorptive_grates(nopiy,nopix,n_slices)
+       endif
         call load_save_add_grates(projected_potential,nopiy,nopix,n_slices)
         if(ionization.or.stem) call make_local_inelastic_potentials(ionization)
     endif
@@ -370,7 +372,10 @@ subroutine absorptive_stem(STEM,ionization,PACBED)
 					do ii=1,num_ionizations
 						 stem_ion_image(ny,nx,i_df,z_indx(1),ii) = get_sum(ion_image_d(:,:,ii))
 					enddo
-					if(.not.EDX) eels_correction_image(ny,nx,i_df,z_indx(1)) = cuda_stem_detector(temp_d,eels_correction_detector_d)
+					!DMH if(.not.EDX) eels_correction_image(ny,nx,i_df,z_indx(1)) = cuda_stem_detector(temp_d,eels_correction_detector_d)
+                                        if(.not.EDX) then
+                                           eels_correction_image(ny,nx,i_df,z_indx(1)) = cuda_stem_detector(temp_d,eels_correction_detector_d)
+                                        endif
 				endif
 				!Output 4D STEM diffraction pattern
 				if(fourDSTEM) then
@@ -430,7 +435,10 @@ subroutine absorptive_stem(STEM,ionization,PACBED)
                     !call binary_out(nopiy,nopix,eels_correction_detector,'eels_correction_detector')
                     !call binary_out(nopiy,nopix,temp,'temp')
                     !stop
-					if(.not.EDX) eels_correction_image(ny,nx,i_df,z_indx(1)) = sum(temp*eels_correction_detector)
+					!DMH if(.not.EDX) eels_correction_image(ny,nx,i_df,z_indx(1)) = sum(temp*eels_correction_detector)
+                                        if(.not.EDX) then
+                                           eels_correction_image(ny,nx,i_df,z_indx(1)) = sum(temp*eels_correction_detector)
+                                        endif
 				endif
 				 
 				!Output 4D STEM diffraction pattern

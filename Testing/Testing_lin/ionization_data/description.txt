@@ -1,0 +1,3 @@
+These files contain ionization potentials for EDX and EELS
+Each element contains the data for a range of incident energies 50kev-400 kev in steps of 50keV.
+Each line has 29 numbers, the first 5 lines for each data block pertain to E`ELS. This is because we have 5 difference energy window ranges that were calculated. The last line (the 6th) pertains to EDX, there is only 1 possible energy window, the entire edge.

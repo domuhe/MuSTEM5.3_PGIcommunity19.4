@@ -53,13 +53,18 @@ Install
 ## Changes to original version 5.3 source code:
 
 <ul>
-<li> **"OPEN (6, CARRIAGECONTROL = "FORTRAN")" not supported by PGI 19.4**
-=>line 145 in mustem.f90: change "OPEN (6, CARRIAGECONTROL = "FORTRAN")" to "Open(6)" was necessary to get it to compile. Then added "call flush" to enable overwriting on command line after an open (6,1,advance=no)
-=>added "call flush" to m_absorption.f90, m_multislice.f90, m_potential.f90, m_user_input.f90, s_absorptive_stem.f90, s_qep_stem.f90 and s_qep_tem.f90
+<li> **"OPEN (6, CARRIAGECONTROL = "FORTRAN")" not supported by PGI 19.4**</li>
+    <ul>
+	<li> line 145 in mustem.f90:  change "*OPEN (6, CARRIAGECONTROL = "FORTRAN")*" to "Open(6)" was necessary to get it to compile.   
+	Then added *"call flush" * to enable overwriting on command line after an "*open (6,1,advance=no)*"</li>
+ <li> added "call flush" to m_absorption.f90, m_multislice.f90, m_potential.f90, m_user_input.f90, s_absorptive_stem.f90, s_qep_stem.f90 and s_qep_tem.f90 </li>
+ </ul>
+<li> **backward slash was hard-coded as path separator**
+In order to make it OS transparent I added -DLIN preprocessor directive to Makefile and added a  *"path_sep"* variable to m_multislice.f90 and m_potential.f90 to pick forward or backward slash as path separator depending on -DLIN preprocessor directive.
 </li>
-<li> **backward slash hard-coded as path separator**
-Added -DLIN preprocessor directive to Makefile and set path_sep variable to pick forward or backward slash for path separator depending on OS in m_multislice.f90 and m_potential.f90
-</li>
+<li> **PGI 19.4 memory allocation problem due to "*if(.not.    )*" one-liner statements**  
+PGI version > 18.1 gets fluffed by if(.non. ) statements on one line (without:  then, newline, endif), see issue 17 on MuSTEM github
+=> Replaced all one-liner if(.non. ) statements with full length statements </li>
 </ul>
 
 
@@ -85,3 +90,5 @@ Note to self: Don't forget to run "make clean" between builds
 <li>"make"</li>
 <li>before a new build run "make clean" but don't forget to move the new executable out of the current folder</li>
 </ul>
+
+

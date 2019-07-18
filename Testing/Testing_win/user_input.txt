@@ -1,0 +1,7 @@
+play
+works/STEM_Si110_PACBED_driver_gpu.txt
+works/STEM_SrTiO3_STEM_driver_gpu.txt
+works/STEM_Al110_CBED_driver_gpu.txt
+works/STEM_Al3Li_ABF_driver_gpu.txt
+works/TEM_Si3N4_HRTEM_driver_gpu.txt
+works/HRTEM_example_gpu.txt

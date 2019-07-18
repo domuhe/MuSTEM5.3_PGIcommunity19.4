@@ -380,7 +380,10 @@ module m_multislice
                     call get_input('<1> Enter again <2> Proceed without loading', i_retry)
                     write(*,*)
                     retry = i_retry==1
-                    if(.not.retry) return
+                    !DMH if(.not.retry) return
+                    if(.not.retry) then
+                       return
+                    endif
                     
                                         
                 endif
@@ -390,7 +393,10 @@ module m_multislice
                 additional_transmission_function=.true.
                 pure_phase=.true.
                 
-                if(.not.allocated(amplitude_fnam)) allocate(amplitude_fnam(n_slices),phase_fnam(n_slices))
+                !DMH if(.not.allocated(amplitude_fnam)) allocate(amplitude_fnam(n_slices),phase_fnam(n_slices))
+                if(.not.allocated(amplitude_fnam)) then
+                   allocate(amplitude_fnam(n_slices),phase_fnam(n_slices))
+                endif
                 do i=1,n_slices
                     if(.not.pure_phase) then
                         write(*,*) char(10),' Please input filename of amplitude of additional transmission function for slice ',i
@@ -447,7 +453,10 @@ module m_multislice
             write(*,*) 'Adding addition transmission function to file...'
             amplitude = 1
             do j=1,n_slices
-                if(.not.pure_phase) call binary_in(nopiy,nopix,amplitude,amplitude_fnam(j))
+                !DMH if(.not.pure_phase) call binary_in(nopiy,nopix,amplitude,amplitude_fnam(j))
+               if(.not.pure_phase) then
+                  call binary_in(nopiy,nopix,amplitude,amplitude_fnam(j))
+               endif
                 call binary_in(nopiy,nopix,phase,phase_fnam(j))
                 qep_grates(:,:,:,j) = qep_grates(:,:,:,j)+spread(transpose(phase),dim=3,ncopies=n_qep_grates)/pi/a0_slice(3,j)*ak
 				if(.not.pure_phase) then
@@ -544,9 +553,15 @@ subroutine load_save_add_grates_abs(abs_grates,nopiy,nopix,n_slices)
                     !Force angle to be between 0 and 2pi
 				    ang = modulo(atan2(g_vec_array(1,y,x),g_vec_array(2,y,x)),2*pi)
 				    if (notwrapped) then
-					    if(.not.(ang>phi_(1).and.ang<=phi_(2))) detector(y,x)=0
+					    !DMH if(.not.(ang>phi_(1).and.ang<=phi_(2))) detector(y,x)=0
+                                            if(.not.(ang>phi_(1).and.ang<=phi_(2))) then
+                                                 detector(y,x)=0
+                                            endif
 				    else
-					    if(.not.(ang>phi_(1).or.ang<=phi_(2))) detector(y,x)=0
+					    !DMH if(.not.(ang>phi_(1).or.ang<=phi_(2))) detector(y,x)=0
+                                            if(.not.(ang>phi_(1).or.ang<=phi_(2))) then
+                                                 detector(y,x)=0
+                                            endif
 				    endif
 			endif;endif
             enddo;enddo;
