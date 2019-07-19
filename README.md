@@ -22,8 +22,8 @@ Built TOK with
 In order to make it OS transparent I added -DLIN preprocessor directive to Makefile and added a  *"path_sep"* variable to m_multislice.f90 and m_potential.f90 to pick forward or backward slash as path separator depending on -DLIN preprocessor directive.
 </li>
 	<li> <b>PGI 19.4 memory allocation problem due to <i>if(.not.    )</i> one-liner statements</b> <br>  
-PGI version > 18.1 gets fluffed by if(.non. ) statements on one line (without:  then, newline, endif), see issue 17 on MuSTEM github
-=> Replaced all one-liner if(.non. ) statements with full length statements </li>
+PGI version > 18.1 gets fluffed by if(.not. ) statements on one line (without:  then, newline, endif), see issue 17 on MuSTEM github
+=> Replaced all one-liner if(.not. ) statements with full length statements </li>
 </ul>
 
 
