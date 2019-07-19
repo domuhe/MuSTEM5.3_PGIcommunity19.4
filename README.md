@@ -10,9 +10,6 @@ Build TOK with
 <li>    and Ubuntu 18.04 with Turing architecture NVidia GPU (RTX 2080Ti) with PGI Community compiler v19.4 and version 5.3 Source folder of MuSTEM from github</li>
 </ul>
 
-**But, Linux build has problem with STEM examples in Tutorial "0: ALLOCATE: 1683627180072 bytes requested; not enough memory"**
-Windows build runs through the Tutorial examples without problems.
-
 ## Prerequisites
 
 ### Windows
