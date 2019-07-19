@@ -1,14 +1,31 @@
 # MuSTEM5.3_PGIcommunity19.4
-Source folder of MuSTEMv5.3 with working Makefile for build with PGI Community 19.4 on Linux and Windows
+Repository for my source folder of MuSTEMv5.3 with working single Makefile for build with PGI Community 19.4 on Linux and Windows.
 
 This folder consists of the MuSTEMv5.3 "Source" folder plus my own Makefile and pgi.env to build MuSTEM v5.3
 on Windows10 and Ubuntu18.04 with PGI Community 19.4 for an RTX 2080Ti graphics card that requires Cuda 10.0 as a minimum.
 
-Build TOK with
+Built TOK with
 <ul>
-<li>Windows10 with Turing architecture NVidia GPU (RTX 2080Ti) with PGI Community compiler v19.4 and version 5.3 Source folder of MuSTEM from github</li>
-<li>    and Ubuntu 18.04 with Turing architecture NVidia GPU (RTX 2080Ti) with PGI Community compiler v19.4 and version 5.3 Source folder of MuSTEM from github</li>
+<li>Windows10 with Turing architecture NVidia GPU (RTX 2080Ti) with PGI Community compiler v19.4 and slightly modified version 5.3 of MuSTEM from github https://github.com/HamishGBrown/MuSTEM </li>
+<li>and Ubuntu 18.04 with Turing architecture NVidia GPU (RTX 2080Ti) with PGI Community compiler v19.4 and slightly modified version 5.3 of MuSTEM from github https://github.com/HamishGBrown/MuSTEM</li>
 </ul>
+
+## Changes to original version 5.3 source code:
+<ul>
+	<li> <b>OPEN (6, CARRIAGECONTROL = "FORTRAN") not supported by PGI 19.4</b></li>
+    <ul>
+	<li> line 145 in mustem.f90:  change "OPEN (6, CARRIAGECONTROL = "FORTRAN")" to "Open(6)" was necessary to get it to compile.   
+	Then added *"call flush" * to enable overwriting on command line after an "*open (6,1,advance=no)*"</li>
+ <li>added "call flush" to m_absorption.f90, m_multislice.f90, m_potential.f90, m_user_input.f90, s_absorptive_stem.f90, s_qep_stem.f90 and s_qep_tem.f90 </li>
+ </ul>
+	<li> <b>backward slash was hard-coded as path separator</b> <br>  
+In order to make it OS transparent I added -DLIN preprocessor directive to Makefile and added a  *"path_sep"* variable to m_multislice.f90 and m_potential.f90 to pick forward or backward slash as path separator depending on -DLIN preprocessor directive.
+</li>
+	<li> <b>PGI 19.4 memory allocation problem due to <i>if(.not.    )</i> one-liner statements</b> <br>  
+PGI version > 18.1 gets fluffed by if(.non. ) statements on one line (without:  then, newline, endif), see issue 17 on MuSTEM github
+=> Replaced all one-liner if(.non. ) statements with full length statements </li>
+</ul>
+
 
 ## Prerequisites
 
@@ -33,7 +50,7 @@ Install
 <li>CUDA dependencies</li>
 <li>CUDA 10.1; "source cuda10.env"</li>
 <li>PGI 19.4 Community; "source pgi.env"</li>
-<li>compile FFTW3 libraries</li>
+<li>compile FFTW3 libraries (or use OS supplied libraries)</li>
 </ul>
 
     pgi.env:
@@ -47,22 +64,7 @@ Install
     export CUDADIR=/usr/local/cuda-10.1
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.1/lib64
 
-## Changes to original version 5.3 source code:
 
-<ul>
-<li> **"OPEN (6, CARRIAGECONTROL = "FORTRAN")" not supported by PGI 19.4**</li>
-    <ul>
-	<li> line 145 in mustem.f90:  change "*OPEN (6, CARRIAGECONTROL = "FORTRAN")*" to "Open(6)" was necessary to get it to compile.   
-	Then added *"call flush" * to enable overwriting on command line after an "*open (6,1,advance=no)*"</li>
- <li> added "call flush" to m_absorption.f90, m_multislice.f90, m_potential.f90, m_user_input.f90, s_absorptive_stem.f90, s_qep_stem.f90 and s_qep_tem.f90 </li>
- </ul>
-<li> **backward slash was hard-coded as path separator**
-In order to make it OS transparent I added -DLIN preprocessor directive to Makefile and added a  *"path_sep"* variable to m_multislice.f90 and m_potential.f90 to pick forward or backward slash as path separator depending on -DLIN preprocessor directive.
-</li>
-<li> **PGI 19.4 memory allocation problem due to "*if(.not.    )*" one-liner statements**  
-PGI version > 18.1 gets fluffed by if(.non. ) statements on one line (without:  then, newline, endif), see issue 17 on MuSTEM github
-=> Replaced all one-liner if(.non. ) statements with full length statements </li>
-</ul>
 
 
 ## Build
@@ -88,4 +90,5 @@ Note to self: Don't forget to run "make clean" between builds
 <li>before a new build run "make clean" but don't forget to move the new executable out of the current folder</li>
 </ul>
 
-
+## Testing
+I have added a folder "Testing" with sub-folders for Windows and Linux versions of the MuSTEM tutorial input files (DOS/Unix format).
